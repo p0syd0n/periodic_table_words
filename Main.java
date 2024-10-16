@@ -11,6 +11,7 @@ public class Main {
   public static String content;
   // List of element symbols.
   public static String[] elements;
+  public static boolean debug = false;
 
 
 // Putting them into a static block, ig. idk why.
@@ -46,10 +47,12 @@ public class Main {
   // The good stuff. Takes the string word (the remaining word), and a list of symbols which were used for the characters that have been used.
   public static void check(String word, List<String> doneAlready) {
     // Debugging
-    System.out.println("Checking: ");
-    System.out.println(word);
-    for (String i : doneAlready) {
-      System.out.println(i);
+    if (debug) {
+      System.out.println("Checking: ");
+      System.out.println(word);
+      for (String i : doneAlready) {
+        System.out.println(i);
+      }  
     }
 
     // If the function is called but the word is empty, we're done!
@@ -69,7 +72,7 @@ public class Main {
     try {
       chars = word.substring(0, 2);
     } catch (java.lang.StringIndexOutOfBoundsException e) {
-      System.out.println("No next 2 characters.");
+      if (debug) System.out.println("No next 2 characters.");
       // If it doesnt work, just use the first character.
 
       /*
@@ -79,8 +82,8 @@ public class Main {
       chars = word.substring(0, 1);
     }
     // Debugging
-    System.out.println(char1+" "+chars);
-
+    if (debug) System.out.println(char1+" "+chars);
+    
     // Checking the first character
     if (Arrays.asList(elements).contains(char1)) {
       // Getting new word (old word, but without first character)
@@ -110,7 +113,7 @@ public class Main {
   }
   public static void main(String[] args) {
     // Uh yeah, test data
-    String word = "accept";
+    String word = "hyperpathogenesis";
     List<String> doneAlready = new ArrayList<>();
     check(word, doneAlready);
     exit("Nope! none.", -1);
